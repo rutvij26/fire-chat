@@ -1,4 +1,4 @@
-import { Grid, GridItem, Show } from '@chakra-ui/react';
+import { Flex, Grid, GridItem, Show, Spinner } from '@chakra-ui/react';
 import React from 'react';
 import NavBar from './NavBar';
 import SideBar from './SideBar';
@@ -8,6 +8,19 @@ import LoginPage from '../login';
 
 const HomePage = () => {
     const { status, data: signInCheckResult } = useSigninCheck();
+
+    if (status === 'loading') {
+        return (
+            <Flex
+                h="100vh"
+                w="full"
+                justifyContent="center"
+                alignItems="center"
+            >
+                <Spinner size="xl" />
+            </Flex>
+        );
+    }
 
     return (
         <>

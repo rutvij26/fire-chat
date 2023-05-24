@@ -13,6 +13,7 @@ const LoginPage = () => {
         const provider = new GoogleAuthProvider();
         provider.addScope('profile');
         provider.addScope('email');
+        provider.addScope('photo');
         const authInstance = getAuth(app);
         try {
             await signInWithPopup(authInstance, provider);

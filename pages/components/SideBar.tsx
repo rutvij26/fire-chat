@@ -3,11 +3,9 @@ import React from 'react';
 
 const SideBar = () => {
     return (
-        <Box bg="gray.700" minH="full">
+        <Box minH="full">
             <VStack spacing="10" pt="5">
-                <Text align="center" color="gray.200">
-                    Contact 1
-                </Text>
+                <Text color="gray.200">Contact 1</Text>
                 <Text color="gray.200">Contact 2</Text>
                 <Text color="gray.200">Contact 3</Text>
             </VStack>

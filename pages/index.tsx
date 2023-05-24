@@ -22,17 +22,17 @@ export default function Home() {
             }}
             h="100vh"
         >
-            <GridItem area="nav" bg="gray.700">
+            <GridItem area="nav" bg="gray.800">
                 {/* Navbar goes here*/}
                 <NavBar />
             </GridItem>
             <Show above="lg">
-                <GridItem area="aside" bg="gray.700">
+                <GridItem area="aside" bg="gray.800">
                     {/* Sidebar goes here */}
                     <SideBar />
                 </GridItem>
             </Show>
-            <GridItem area="main" bg="gray.600">
+            <GridItem area="main" bg="gray.800">
                 <ChatContainer />
             </GridItem>
         </Grid>

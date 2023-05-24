@@ -4,10 +4,13 @@ import { Center, Grid, GridItem, Show } from '@chakra-ui/react';
 import NavBar from './components/NavBar';
 import SideBar from './components/SideBar';
 import ChatContainer from './components/ChatContainer';
+import { useFirebaseApp } from 'reactfire';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
+    const app = useFirebaseApp();
+
     return (
         <Grid
             templateAreas={{

@@ -1,15 +1,20 @@
 import '@/styles/globals.css';
-import { CSSReset, ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 import theme from './theme';
-
+import { CSSReset, ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 import type { AppProps } from 'next/app';
+import { FirebaseAppProvider } from 'reactfire';
+import { firebaseConfig } from '@/firebase';
 
 export default function App({ Component, pageProps }: AppProps) {
     return (
-        <ChakraProvider theme={theme}>
-            <CSSReset />
-            <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-            <Component {...pageProps} />
-        </ChakraProvider>
+        <FirebaseAppProvider firebaseConfig={firebaseConfig}>
+            <ChakraProvider theme={theme}>
+                <CSSReset />
+                <ColorModeScript
+                    initialColorMode={theme.config.initialColorMode}
+                />
+                <Component {...pageProps} />
+            </ChakraProvider>
+        </FirebaseAppProvider>
     );
 }

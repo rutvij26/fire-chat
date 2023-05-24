@@ -18,7 +18,9 @@ const InputBar = () => {
             }}
         >
             <InputGroup>
-                <InputLeftElement children={<FaKeyboard />} />
+                <InputLeftElement>
+                    <FaKeyboard />
+                </InputLeftElement>
                 <Input
                     bg="gray.600"
                     ref={ref}
@@ -26,7 +28,9 @@ const InputBar = () => {
                     placeholder="Type a Text..."
                     variant="outline"
                 />
-                <InputRightElement children={<AiOutlineSend />} />
+                <InputRightElement>
+                    <AiOutlineSend />
+                </InputRightElement>
             </InputGroup>
         </form>
     );

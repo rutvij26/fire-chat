@@ -1,6 +1,9 @@
 import Image from 'next/image';
 import { Inter } from 'next/font/google';
 import { Center, Grid, GridItem, Show } from '@chakra-ui/react';
+import NavBar from './components/NavBar';
+import SideBar from './components/SideBar';
+import ChatContainer from './components/ChatContainer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -9,27 +12,28 @@ export default function Home() {
         <Grid
             templateAreas={{
                 base: `"nav" "main"`,
-                lg: `"nav nav" "aside main"`,
+                lg: `"nav nav" 
+                    "aside main"`,
             }}
+            templateRows={'0.05fr 1fr'}
             templateColumns={{
                 base: '1fr',
                 lg: '200px 1fr',
             }}
             h="100vh"
-            w="100%"
         >
-            <GridItem area="nav" h="10%">
+            <GridItem area="nav" bg="gray.700">
                 {/* Navbar goes here*/}
-                <Center>Navbar</Center>
+                <NavBar />
             </GridItem>
             <Show above="lg">
-                <GridItem area="aside">
+                <GridItem area="aside" bg="gray.700">
                     {/* Sidebar goes here */}
-                    <Center>Sidebar</Center>
+                    <SideBar />
                 </GridItem>
             </Show>
-            <GridItem area="main">
-                <Center>Main</Center>
+            <GridItem area="main" bg="gray.600">
+                <ChatContainer />
             </GridItem>
         </Grid>
     );

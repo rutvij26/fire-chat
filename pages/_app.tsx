@@ -1,5 +1,5 @@
 import '@/styles/globals.css';
-import theme from './theme';
+import theme from '@/theme';
 import { CSSReset, ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 import type { AppProps } from 'next/app';
 import { FirebaseAppProvider } from 'reactfire';

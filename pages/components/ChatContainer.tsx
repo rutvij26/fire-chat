@@ -2,8 +2,9 @@ import { Flex, Center, Grid, GridItem } from '@chakra-ui/react';
 import React from 'react';
 import ChatBox from './ChatBox';
 import ChatInput from './ChatInput';
+import { observer } from 'mobx-react-lite';
 
-const ChatContainer = () => {
+export default observer(function ChatContainer() {
     return (
         <Grid
             bg="gray.800"
@@ -21,6 +22,4 @@ const ChatContainer = () => {
             </GridItem>
         </Grid>
     );
-};
-
-export default ChatContainer;
+});

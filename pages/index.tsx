@@ -1,6 +1,5 @@
 import { Inter } from 'next/font/google';
 import {
-    AuthCheck,
     AuthProvider,
     DatabaseProvider,
     useFirebaseApp,
@@ -9,7 +8,6 @@ import {
 import { getAuth } from 'firebase/auth'; // Firebase v9+
 import { getDatabase } from 'firebase/database';
 import HomePage from './components/HomePage';
-import LoginPage from './login';
 
 const inter = Inter({ subsets: ['latin'] });
 

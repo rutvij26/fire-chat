@@ -5,8 +5,9 @@ import SideBar from './SideBar';
 import ChatContainer from './ChatContainer';
 import { useSigninCheck } from 'reactfire';
 import LoginPage from '../login';
+import { observer } from 'mobx-react-lite';
 
-const HomePage = () => {
+export default observer(function HomePage() {
     const { status, data: signInCheckResult } = useSigninCheck();
 
     if (status === 'loading') {
@@ -57,6 +58,4 @@ const HomePage = () => {
             )}
         </>
     );
-};
-
-export default HomePage;
+});

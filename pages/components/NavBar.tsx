@@ -2,8 +2,9 @@ import { Avatar, Box, Flex, HStack, Text } from '@chakra-ui/react';
 import React from 'react';
 import Logo from './Logo';
 import { useAuth, useUser } from 'reactfire';
+import { observer } from 'mobx-react-lite';
 
-const NavBar = () => {
+export default observer(function NavBar() {
     const { status, data: user } = useUser();
     const auth = useAuth();
     return (
@@ -34,6 +35,4 @@ const NavBar = () => {
             </HStack>
         </Flex>
     );
-};
-
-export default NavBar;
+});

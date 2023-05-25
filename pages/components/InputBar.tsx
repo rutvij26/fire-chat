@@ -7,14 +7,34 @@ import {
 import React, { useRef } from 'react';
 import { FaKeyboard } from 'react-icons/fa';
 import { AiOutlineSend } from 'react-icons/ai';
+import { observer, useLocalObservable } from 'mobx-react-lite';
+import { arrayUnion, doc, getFirestore, updateDoc } from 'firebase/firestore';
+import { useFirebaseApp, useUser } from 'reactfire';
+import ChatStore from '../store/ChatStore';
 
-const InputBar = () => {
+export default observer(function InputBar() {
     const ref = useRef<HTMLInputElement>(null);
+    const app = useFirebaseApp();
+    const db = getFirestore(app);
+    const { status, data: user } = useUser();
+    const store = useLocalObservable(() => ChatStore);
     return (
         <form
-            onSubmit={(event) => {
+            onSubmit={async (event) => {
                 event.preventDefault();
-                console.log('text', ref.current?.value);
+                const chatRef = doc(db, 'chats', store.activeId);
+                user &&
+                    ref.current?.value &&
+                    (await updateDoc(chatRef, {
+                        conversation: arrayUnion({
+                            to: store.activeEmail,
+                            from: user.email,
+                            message: ref.current.value,
+                        }),
+                    }));
+                if (ref.current) {
+                    ref.current.value = '';
+                }
             }}
         >
             <InputGroup>
@@ -34,6 +54,4 @@ const InputBar = () => {
             </InputGroup>
         </form>
     );
-};
-
-export default InputBar;
+});

@@ -1,6 +1,7 @@
 import { Box, Button, Flex, Text } from '@chakra-ui/react';
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 import { doc, getFirestore, setDoc, serverTimestamp } from 'firebase/firestore';
+import { observer } from 'mobx-react-lite';
 import { useRouter } from 'next/router';
 import React from 'react';
 import {
@@ -11,7 +12,7 @@ import {
     useFirestoreCollection,
 } from 'reactfire';
 
-const LoginPage = () => {
+export default observer(function LoginPage() {
     const app = useFirebaseApp();
     // const auth = useAuth();
     const db = getFirestore(app);
@@ -55,6 +56,4 @@ const LoginPage = () => {
             <Button onClick={handleGoogleSignIn}>Sign in with Google</Button>
         </Flex>
     );
-};
-
-export default LoginPage;
+});

@@ -14,8 +14,11 @@ import {
     query,
     where,
 } from 'firebase/firestore';
+import { observer, useLocalObservable } from 'mobx-react-lite';
+import ChatStore from '../store/ChatStore';
 
-const SideBar = () => {
+export default observer(function SideBar() {
+    const store = useLocalObservable(() => ChatStore);
     const app = useFirebaseApp();
     const auth = useAuth();
     const firestore = getFirestore(app);
@@ -34,9 +37,12 @@ const SideBar = () => {
     const contactList = useMemo(
         () =>
             chats?.map((chat) => {
-                return chat.users.find(
-                    (userEmail: string) => userEmail !== user?.email
-                );
+                return {
+                    id: chat.NO_ID_FIELD,
+                    reciepent: chat.users.find(
+                        (email: string) => email !== user?.email
+                    ),
+                };
             }),
         [chats, user]
     );
@@ -78,6 +84,15 @@ const SideBar = () => {
         [chats]
     );
 
+    const handleContactClick = useCallback(
+        (id: string, email: string) => {
+            store.setActiveChatIdEmail(id, email, firestore);
+        },
+        [store]
+    );
+
+    console.log('store.activeChatEmail', store.activeEmail);
+
     return (
         <Flex
             flexDir="column"
@@ -98,7 +113,7 @@ const SideBar = () => {
                     Start a new Chat
                 </Button>
                 <List pt={4}>
-                    {contactList?.map((reciepent) => (
+                    {contactList?.map(({ id, reciepent }) => (
                         <Flex
                             w="full"
                             alignItems="center"
@@ -107,7 +122,13 @@ const SideBar = () => {
                             _hover={{
                                 backgroundColor: 'gray.600',
                             }}
+                            backgroundColor={
+                                reciepent === store.activeEmail
+                                    ? 'gray.600'
+                                    : 'gray.800'
+                            }
                             p={1}
+                            onClick={() => handleContactClick(id, reciepent)}
                         >
                             <Text py={4} color="gray.200" align="center">
                                 {reciepent}
@@ -128,6 +149,4 @@ const SideBar = () => {
             </Button>
         </Flex>
     );
-};
-
-export default SideBar;
+});
